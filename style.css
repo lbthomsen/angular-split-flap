@@ -1,0 +1,22 @@
+/*
+ * Style
+ */
+
+.split-flap {
+    font-size: 45px;
+    font-weight: bold;
+}
+
+span.split-flap-character {
+    background-color: black;
+    color: white;
+    margin: 2px 2px 2px 2px;
+    display: inline-block;
+    border: 1px solid grey;
+    width: 45px;
+    text-align: center;
+}
+
+/*
+ * vim: ts=4 et nowrap autoindent
+ */

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--+
+    | Split-Flap Test
+	+-->
+<html ng-app="split-flap" ng-controller="AppController as appCtrl">
+    <head>
+        <title>Split-Flap Display</title>
+
+        <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <split-flap length="{{appCtrl.length}}" value="{{appCtrl.value}}"/>
+        </div>
+
+        <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="node_modules/popper.js/dist/umd/popper.js"></script>
+        <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+    </body>
+</html>
+<!--+
+    | vim: ts=4 et nowrap autoindent
+	+-->
