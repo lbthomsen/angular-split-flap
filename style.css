@@ -12,9 +12,31 @@ span.split-flap-character {
     color: white;
     margin: 2px 2px 2px 2px;
     display: inline-block;
+    padding: 0;
     border: 1px solid grey;
-    width: 45px;
+    width: 1em;
+    height: 1.5em;
     text-align: center;
+    position: relative;
+}
+
+.split-flap-character > .panel {
+    display: block;
+    position: absolute;
+    height: 49%;
+    width: 100%;
+    object-fit: none;
+}
+
+.split-flap-character > .upper {
+    background-color: red;
+    top: 0;
+}
+
+.split-flap-character > .lower {
+    background-color: green;
+    bottom: 0;
+    object-fit: none;
 }
 
 /*

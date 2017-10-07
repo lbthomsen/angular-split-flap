@@ -1,15 +1,25 @@
 {
-  "name": "split-flap",
+  "name": "angular-split-flap-lbthomsen",
   "version": "0.0.1",
-  "description": "Split-Flap Display",
-  "main": "index.js",
+  "description": "Angular Split-Flap Display",
+  "main": "angular-split-flap.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbthomsen/angular-split-flap.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Lars Boegild Thomsen <lth@cow.dk>",
-  "license": "UNLICENSED",
+  "author": "Lars Boegild Thomsen <lbthomsen@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lbthomsen/angular-split-flap/issues"
+  },
+  "homepage": "https://lth.bright-things.com/angular-split-flap",
   "dependencies": {
     "angular": "^1.6.6",
+    "angular-animate": "^1.6.6",
+    "bootstrap": "^4.0.0-beta",
     "jquery": "^3.2.1",
     "popper.js": "^1.12.5"
   }
