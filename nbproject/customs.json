@@ -2,6 +2,7 @@
     "elements": {
         "split-flap": {
             "attributes": {
+                "size": {},
                 "length": {},
                 "value": {}
             }

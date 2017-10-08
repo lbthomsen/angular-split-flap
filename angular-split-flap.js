@@ -12,7 +12,9 @@
                 replace: true,
                 scope: {
                     value: "@",
-                    length: "@"
+                    length: "@",
+                    size: "@",
+                    deck: "@"
                 },
                 controller: ["$log", "$scope",
                     function ($log, $scope) {
@@ -20,6 +22,9 @@
 
                         var that = this;
                         that.characters = [];
+                        that.class = [
+                            $scope.size
+                        ]
 
                         for (var i = 0; i < $scope.length; ++i) {
                             that.characters.push("\xa0");
@@ -39,7 +44,7 @@
                     }
                 ],
                 controllerAs: "splitFlapCtrl",
-                template: '<div class="split-flap"><split-flap-character ng-repeat="character in splitFlapCtrl.characters track by $index" value="{{character}}"/></div>'
+                template: '<div class="flapper" ng-class="size"><split-flap-character ng-repeat="character in splitFlapCtrl.characters track by $index" value="{{character}}" deck="{{deck}}"/></div>'
             };
         }
     ]);
@@ -50,18 +55,25 @@
                 restrict: "E",
                 replace: true,
                 scope: {
-                    value: "@"
+                    value: "@",
+                    deck: "@"
                 },
                 controller: ["$log", "$scope", "$timeout",
-                    function ($log, $scope, $timeout) {
+                    function ($log, $scope, $timeout, ngAudio) {
                         $log.debug("SplitFlapCharacerController: starting");
 
-                        var deck = "\xa0ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,.-!:;";
+                        var deck = ($scope.deck || "\xa0ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,.-!:;");
                         var deckIdx = 0;
                         var timeout = null;
 
                         var that = this;
                         that.character = deck.charAt(deckIdx);
+
+                        if (deckIdx + 1 < deck.length) {
+                            that.nextCharacter = deck.charAt(deckIdx + 1);
+                        } else {
+                            that.nextCharacter = deck.charAt(0);
+                        }
 
                         that.moveTo = function (character) {
                             if (timeout) {
@@ -73,6 +85,11 @@
                                     deckIdx = 0;
                                 }
                                 that.character = deck.charAt(deckIdx);
+                                if (deckIdx + 1 < deck.length) {
+                                    that.nextCharacter = deck.charAt(deckIdx + 1);
+                                } else {
+                                    that.nextCharacter = deck.charAt(0);
+                                }
 
                                 if (character !== that.character) {
                                     that.moveTo(character);
@@ -89,7 +106,7 @@
                     }
                 ],
                 controllerAs: "splitFlapCharacterCtrl",
-                template: '<span class="split-flap-character">{{splitFlapCharacterCtrl.character}}</span>'
+                template: '<div class=digit"><div class="back top">{{splitFlapCharacterCtrl.nextCharacter}}</div><div class="back bottom">{{splitFlapCharacterCtrl.character}}</div><div class="front top" ng-class="splitFlapCharacterCtrl.topClass">{{splitFlapCharacterCtrl.character}}</div><div class="front bottom" ng-class="splitFlapCharacterCtrl.botClass">{{splitFlapCharacterCtrl.nextCharacter}}</div></div>'
             };
         }
     ]);

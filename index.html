@@ -13,29 +13,32 @@
     <body  ng-controller="AppController as appCtrl">
         <div class="container-fluid">
             <h1>Split Flap (Solari) Display</h1>
+
             <p>
                 AngularJS Split Flap module under development.
             </p>
 
-            <split-flap length="{{appCtrl.length}}" value="{{appCtrl.value}}"></split-flap>
+            <div>
+                <split-flap  size="L" length="{{appCtrl.length}}" value="{{appCtrl.value}}"></split-flap>
+            </div>
 
-            <p>
-                Test
-            </p>
-
-            <div class="display">
-                <div class="flapper XXL">
-                    <div class="digit">
-                        <div class="back top">B</div>
-                        <div class="back bottom">B</div>
-                        <div class="front top">A</div>
-                        <div class="front bottom">A</div>
-                    </div>
-                    <div class="digit">
-                        <div class="top">B</div>
-                        <div class="bottom">B</div>
+            <h3>Test</h3>
+            <div class="row" ng-controller="TestController as testCtrl">
+                <div class="col-3">
+                    <div class="flapper XXL">
+                        <div class="digit">
+                            <div class="back top">B</div>
+                            <div class="back bottom">A</div>
+                            <div class="front top" ng-class="testCtrl.topClass">A</div>
+                            <div class="front bottom" ng-class="testCtrl.botClass">B</div>
+                        </div>
                     </div>
                 </div>
+                <div class="col-9">
+                    <button class="btn btn-primary" ng-click="testCtrl.reset()">Reset</button>
+                    <button class="btn btn-primary" ng-click="testCtrl.flip()">Click to Flip</button>
+                </div>
+
             </div>
         </div>
 
@@ -44,35 +47,7 @@
         <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
         <script type="text/javascript" src="node_modules/angular/angular.js"></script>
         <script type="text/javascript" src="angular-split-flap.js"></script>
-        <script type="text/javascript">
-                        (function () {
-
-                            var appName = "split-flap";
-
-                            var app = angular.module(appName, [
-                                "ngSplitFlap"
-                            ]);
-
-                            app.controller("AppController", ["$log", "$scope", "$interval",
-                                function ($log, $scope, $interval) {
-                                    $log.debug("AppController: starting");
-
-                                    var that = this;
-                                    that.length = 20;
-                                    that.value = "";
-
-                                    that.interval = $interval(function () {
-                                        that.value = "Hello\xa0World\xa0" + new Date().toTimeString();
-                                    }, 1000);
-
-                                    $scope.$on("$destroy", function () {
-                                        $interval.cancel(that.interval);
-                                    });
-                                }
-                            ]);
-
-                        })();
-        </script>
+        <script type="text/javascript" src="app.js"></script>
     </body>
 </html>
 <!--+
