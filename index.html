@@ -10,42 +10,101 @@
         <link rel="stylesheet" type="text/css" href="angular-split-flap.css"/>
         <link rel="stylesheet" type="text/css" href="style.css"/>
     </head>
-    <body  ng-controller="AppController as appCtrl">
+    <body ng-cloak ng-controller="AppController as appCtrl">
         <div class="container-fluid">
-            <h1>Split Flap (Solari) Display</h1>
+            <div class="row mt-5 mb-5" ng-controller="HeaderController as headerCtrl">
+                <div class="col-lg-7">
+                    <h1>{{headerCtrl.title}}</h1>
+                </div>
+                <div class="col-lg-5 text-right">
+                    <split-flap  size="S" length="10" value="{{headerCtrl.value}}"></split-flap>
+                </div>
+            </div>
 
+            <h2>Introduction</h2>
             <p>
                 AngularJS Split Flap module under development.
             </p>
+            
+            <h2>Installation</h2>
+            <p>
+                This module is available in npm.  Install with:
+            </p>
+            <code ng-non-bindable>
+                npm install angular-split-flap --save
+            </code>
+            
+            <h2>
+                Usage
+            </h2>
+            <p>
+                Install angular-split-flap as described the previous section.
+            </p>
+            <code ng-non-bindable>
+                &lt;html>
+            </code>
 
-            <!--div>
-                <split-flap  size="L" length="{{appCtrl.length}}" value="{{appCtrl.value}}"></split-flap>
-            </div-->
+            <h2>Examples</h2>
 
-            <h3>Test</h3>
-            <div class="row" ng-controller="TestController as testCtrl">
-                <div class="col-3">
-                    <div class="flapper XXL">
-                        <div class="digit">
-                            <div class="back top">B</div>
-                            <div class="back bottom">A</div>
-                            <div class="front top" ng-class="testCtrl.topClass">A</div>
-                            <div class="front bottom" ng-class="testCtrl.botClass">B</div>
+            <div class="card mt-4" ng-controller="SingleController as singleCtrl">
+                <div class="card-header">
+                    <h3>Single Character</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-md-6">
+                        <split-flap  size="XXL" length="1" time="0.3" deck="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" value="{{singleCtrl.value}}"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            The first example of a single character.
+                        </p>
+                        <code ng-non-bindable>
+                            &lt;split-flap  size="XXL" length="1" time="0.3" deck="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" value="{{singleCtrl.value}}"/&gt;
+                        </code>
+                    </div>
                         </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h3>Multiple Characters</h3>
+                </div>
+                <div class="card-body row">
+                    <div class="col-md-6">
+                        <split-flap  size="L" length="20" time="0.1" value="{{multiple}}"></split-flap>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control mb-3" ng-model="multiple" ng-value=""/>
+                        <code ng-non-bindable>
+                            &lt;split-flap  size="L" length="20" value="{{multiple}}"/&gt;
+                        </code>
                     </div>
                 </div>
-                <div class="col-9">
-                    <button class="btn btn-primary" ng-click="testCtrl.reset()">Reset</button>
-                    <button class="btn btn-primary" ng-click="testCtrl.flip()">Click to Flip</button>
-                </div>
+            </div>
 
+            <div class="card mt-3 mb-5" ng-controller="ClockController as clockCtrl">
+                <div class="card-header">
+                    <h3>Clock</h3>
+                </div>
+                <div class="card-body row">
+                        <div class="col-md-6">
+                            <split-flap  size="S" length="8" deck="0123456789:" value="{{clockCtrl.time}}"></split-flap>
+                        </div>
+                        <div class="col-md-6">
+                            Clock example.
+                        </div>
+                </div>
             </div>
         </div>
 
         <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="node_modules/popper.js/dist/umd/popper.js"></script>
         <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="node_modules/moment/moment.js"></script>
         <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+        <script type="text/javascript" src="node_modules/angular-moment/angular-moment.js"></script>
         <script type="text/javascript" src="angular-split-flap.js"></script>
         <script type="text/javascript" src="app.js"></script>
     </body>

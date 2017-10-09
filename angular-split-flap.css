@@ -49,7 +49,7 @@
 .flapper.XXL {
     font-size: 116px;
     line-height: 123px;
-    height: 132px;
+    xxheight: 132px;
 }
 
 .flapper.XXL .digit {
@@ -81,7 +81,7 @@
 .flapper.XL {
     font-size: 89px;
     line-height: 92px;
-    height: 100px;
+    xxheight: 100px;
 }
 
 .flapper.XL .digit {
@@ -118,7 +118,7 @@
 .flapper.L {
     font-size: 66px;
     line-height: 70px;
-    height: 76px;
+    xxheight: 76px;
 }
 
 .flapper.L .digit {
@@ -155,7 +155,7 @@
 .flapper {
     font-size: 51px;
     line-height: 52px;
-    height: 58px;
+    xxheight: 58px;
 }
 
 .flapper .digit {
@@ -192,7 +192,7 @@
 .flapper.S {
     font-size: 36px;
     line-height: 39px;
-    height: 44px;
+    xxheight: 44px;
 }
 
 .flapper.S .digit {
@@ -290,24 +290,24 @@
 }
 
 /* The starting CSS styles for the enter animation */
-.front.top.flip-in {
+.front.top {
+  transform: scaleY(1);
+}
+
+.front.top.flip {
   transform: scaleY(0);
-  transition-duration: 0.5s;
+  /*transition-duration: 0.025s;*/
   transition-timing-function: ease-in;
 }
 
-.front.top.flip-out {
-  transform: scaleY(1);
-}
-
-.front.bottom.flip-in {
+.front.bottom {
   transform: scaleY(0);
 }
 
-.front.bottom.flip-out {
+.front.bottom.flip {
   transform: scaleY(1);
-  transition-duration: 0.5s;
-  transition-delay: 0.5s;
+  /*transition-duration: 0.025s;
+  transition-delay: 0.025s;*/
   transition-timing-function: linear;
 }
 

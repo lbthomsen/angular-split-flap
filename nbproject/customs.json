@@ -3,6 +3,7 @@
         "split-flap": {
             "attributes": {
                 "size": {},
+                "deck": {},
                 "length": {},
                 "value": {}
             }
