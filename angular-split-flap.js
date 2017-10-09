@@ -5,7 +5,7 @@
 
     var module = angular.module("ngSplitFlap", []);
 
-    module.directive("splitFlap", ["$log", 
+    module.directive("splitFlap", ["$log",
         function ($log) {
             return {
                 restrict: "E",
@@ -14,12 +14,12 @@
                     value: "@",
                     length: "@",
                     size: "@",
-                    deck: "@", 
+                    deck: "@",
                     time: "@"
-                }, 
-                controller: ["$log", "$scope", "$window", 
+                },
+                controller: ["$log", "$scope", "$window",
                     function ($log, $scope, $window) {
-                        $log.debug("SplitFlapController: starting - window = %o", $window);
+                        //$log.debug("SplitFlapController: starting - window = %o", $window);
 
                         var that = this;
                         that.characters = [];
@@ -42,7 +42,7 @@
 
                         $scope.$watch("value", function () {
                             that.resetAll();
-                            that.setCharacters($scope.value.substring(0, $scope.length).replace(/ /, "\xa0"));
+                            that.setCharacters($scope.value.substring(0, $scope.length).replace(/ /g, "\xa0"));
                         });
 
                     }
@@ -60,33 +60,34 @@
                 replace: true,
                 scope: {
                     value: "@",
-                    deck: "@", 
+                    deck: "@",
                     time: "@"
                 },
                 controller: ["$log", "$scope", "$timeout",
                     function ($log, $scope, $timeout, ngAudio) {
-                        $log.debug("SplitFlapCharacerController: starting");
-                        
+                        //$log.debug("SplitFlapCharacerController: starting");
+
                         var timerTime = Number($scope.time || "0.05");
-                        var transitionTime = (timerTime * 0.45).toString() + "s";
-                        
-                        $log.debug("SplitFlapCharacterController: timerTime = %o, transitionTime = %o", timerTime, transitionTime);
+                        var transitionTime = (timerTime * 0.4).toString() + "s";
+
+                        //$log.debug("SplitFlapCharacterController: timerTime = %o, transitionTime = %o", timerTime, transitionTime);
 
                         var deck = ($scope.deck || "\xa0ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,.-!:;");
                         var deckIdx = 0;
                         var timeout = null;
+                        var moveToCharacter;
 
                         var that = this;
                         that.flipClass = {
                             flip: 0
                         };
-                        
+
                         that.topFlipStyle = {
                             "transition-duration": "0"
                         };
-                        
+
                         that.bottomFlipStyle = {
-                            "transition-duration": "0", 
+                            "transition-duration": "0",
                             "transition-delay": "0"
                         };
 
@@ -106,33 +107,34 @@
 
                         that.resetCharacters();
 
-                        that.moveTo = function (character) {
+                        that.startFlipping = function () {
 
                             if (timeout) {
                                 $timeout.cancel(timeout);
+                                timeout = null;
                             }
 
                             that.resetCharacters();
 
-                            if (that.character !== character) {
+                            if (that.character !== moveToCharacter) {
                                 that.topFlipStyle["transition-duration"] = transitionTime;
-                            that.bottomFlipStyle["transition-duration"] = transitionTime;
-                            that.bottomFlipStyle["transition-delay"] = transitionTime;
+                                that.bottomFlipStyle["transition-duration"] = transitionTime;
+                                that.bottomFlipStyle["transition-delay"] = transitionTime;
                                 that.flipClass.flip = 1;
                                 timeout = $timeout(function () {
                                     deckIdx = deckIdx + 1;
                                     if (deckIdx >= deck.length)
                                         deckIdx = 0;
-                                    that.moveTo(character);
+                                    that.startFlipping();
                                 }, timerTime * 1000);
                             }
 
                         };
 
                         $scope.$watch("value", function () {
-                            //$log.debug("SplitFlapCharacterController: value changed - now = %o", $scope.value);
-                            //that.character = $scope.value;
-                            that.moveTo($scope.value);
+                            moveToCharacter = $scope.value;
+                            if (!timeout) 
+                                that.startFlipping();
                         });
                     }
                 ],
