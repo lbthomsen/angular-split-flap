@@ -292,7 +292,7 @@
 /* The starting CSS styles for the enter animation */
 .front.top.flip-in {
   transform: scaleY(0);
-  transition-duration: 0.05s;
+  transition-duration: 0.5s;
   transition-timing-function: ease-in;
 }
 
@@ -306,8 +306,8 @@
 
 .front.bottom.flip-out {
   transform: scaleY(1);
-  transition-duration: 0.05s;
-  transition-delay: 0.05s;
+  transition-duration: 0.5s;
+  transition-delay: 0.5s;
   transition-timing-function: linear;
 }
 
